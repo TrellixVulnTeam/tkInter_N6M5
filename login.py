@@ -10,6 +10,8 @@ def signUp():
     global windowSignIn
     global entryLogin
     global entryPswd
+    global msgError
+
     windowLogin.destroy()
     windowSignIn = Tk()
     windowSignIn.title('Sign up')
@@ -28,16 +30,29 @@ def signUp():
 
     buttonSign = Button(windowSignIn, text='Sign up', command=bSignup)
     buttonSign.grid(columnspan=2, sticky=W)
+
+    msgError = Label(windowSignIn)
+    msgError.grid(row=3, columnspan=1, sticky=W)
+
     windowSignIn.mainloop()
 
 
 def bSignup():
-    with open(creds, 'w') as f:
-        f.write(entryLogin.get())
-        f.write(':')
-        f.write(entryPswd.get())
-        f.write('\n')
-        f.close()
+    with open(creds, 'r') as f:
+        for line in f:
+            user, pswd = line.strip().split(':')
+            x=user
+
+    checkUsr = entryLogin.get()
+    if checkUsr in :
+        msgError.configure(text='User exists already!')
+    else:
+        with open(creds, 'a') as f:
+            f.write(entryLogin.get())
+            f.write(':')
+            f.write(entryPswd.get())
+            f.write('\n')
+            f.close()
 
     windowSignIn.destroy()
     logIn()
