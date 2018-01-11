@@ -201,7 +201,7 @@ def addTool():
 def logOut():
     windowLogged.destroy()
     logIn()
-#window 3 close 
+#window 3 close
 
 if os.path.isfile(creds):
     logIn()
