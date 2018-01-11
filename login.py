@@ -57,13 +57,13 @@ def bSignup():
     windowSignIn.destroy()
     logIn()
 
-
+#window 1 close
 def logIn():
     global entryLoginL
     global entryPswdL
     global windowLogin
     global error
-
+#window 2
     windowLogin = Tk()
     windowLogin.title('Login')
 
@@ -105,11 +105,11 @@ def checkLogin():
     else:
         error.configure(text="Credentials are wrong")
         windowLogin.mainloop()
-
+#window 2 close
 
 def mainWindow():
     global windowLogged
-
+#window 3
     windowLogged = Tk()
     windowLogged.title('Search Engine')
     windowLogged.geometry('120x350')
@@ -125,8 +125,10 @@ def mainWindow():
 
 
 def searchEngine():
+    #window 4
     windowSearch = Tk()
     windowSearch.title('Tools')
+
     i = 2
     gName = Label(windowSearch, text='Name', font='bold')
     gDay = Label(windowSearch, text='Per Day', font='bold')
@@ -157,7 +159,7 @@ def winAddTool():
     global eName
     global eDay
     global eHDay
-
+#window 5
     windowAddTool = Tk()
     windowAddTool.title('Add new tool')
 
@@ -194,12 +196,12 @@ def addTool():
         f.close()
 
     windowAddTool.destroy()
-
+#window 5 close
 
 def logOut():
     windowLogged.destroy()
     logIn()
-
+#window 3 close 
 
 if os.path.isfile(creds):
     logIn()
