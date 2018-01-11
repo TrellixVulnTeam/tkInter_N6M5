@@ -41,10 +41,10 @@ def bSignup():
     with open(creds, 'r') as f:
         for line in f:
             user, pswd = line.strip().split(':')
-            x=user
+            credss[user] = pswd
 
     checkUsr = entryLogin.get()
-    if checkUsr in :
+    if checkUsr in credss[user]:
         msgError.configure(text='User exists already!')
     else:
         with open(creds, 'a') as f:
@@ -125,17 +125,22 @@ def mainWindow():
 
 
 def searchEngine():
+
     windowSearch = Tk()
     windowSearch.title('Tools')
+
     i = 2
+
     gName = Label(windowSearch, text='Name', font='bold')
     gDay = Label(windowSearch, text='Per Day', font='bold')
     gHDay = Label(windowSearch, text='Half of Day', font='bold')
     gIsAvail = Label(windowSearch, text='Is Available', font='bold')
+
     gName.grid(row=1, column=1)
     gDay.grid(row=1, column=2)
     gHDay.grid(row=1, column=3)
     gIsAvail.grid(row=1, column=4)
+
     with open(base, 'r') as f:
         for line in f:
             name, day, hday, isAvailable = line.strip().split(':')
@@ -164,6 +169,7 @@ def winAddTool():
     gName = Label(windowAddTool, text='Name', font='bold')
     gDay = Label(windowAddTool, text='Price per Day', font='bold')
     gHDay = Label(windowAddTool, text='Price per half day', font='bold')
+
     gName.grid(row=1, column=1)
     gDay.grid(row=2, column=1)
     gHDay.grid(row=3, column=1)
