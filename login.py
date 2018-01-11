@@ -41,10 +41,10 @@ def bSignup():
     with open(creds, 'r') as f:
         for line in f:
             user, pswd = line.strip().split(':')
-            x=user
+            credss[user] = pswd
 
     checkUsr = entryLogin.get()
-    if checkUsr in :
+    if checkUsr in credss[user]:
         msgError.configure(text='User exists already!')
     else:
         with open(creds, 'a') as f:
