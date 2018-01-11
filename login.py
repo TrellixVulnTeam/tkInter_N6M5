@@ -11,7 +11,7 @@ def signUp():
     global entryLogin
     global entryPswd
     global msgError
-
+#window 1
     windowLogin.destroy()
     windowSignIn = Tk()
     windowSignIn.title('Sign up')
