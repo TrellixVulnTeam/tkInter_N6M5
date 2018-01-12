@@ -1,6 +1,7 @@
 from tkinter import *
 import os
 
+
 creds = 'users.txt'
 base = 'search.txt'
 credss = {}
@@ -15,12 +16,14 @@ def signUp():
     windowLogin.destroy()
     windowSignIn = Tk()
     windowSignIn.title('Sign up')
-    instruction = Label(windowSignIn, text='Please enter new credidentials\n')
+    windowSignIn.config(bg="PeachPuff2")
+    windowSignIn.geometry("250x400")
+    instruction = Label(windowSignIn, text='Please enter new credidentials\n', bg="PeachPuff2")
     instruction.grid(row=0, column=0, sticky=E)
 
-    labelLogin = Label(windowSignIn, text='New login: ')
+    labelLogin = Label(windowSignIn, text='New login: ', bg="PeachPuff2")
     labelLogin.grid(row=1, column=0, sticky=W)
-    labelPswd = Label(windowSignIn, text='New password: ')
+    labelPswd = Label(windowSignIn, text='New password: ', bg="PeachPuff2")
     labelPswd.grid(row=2, column=0, sticky=W)
 
     entryLogin = Entry(windowSignIn)
@@ -28,7 +31,7 @@ def signUp():
     entryPswd = Entry(windowSignIn, show='*')
     entryPswd.grid(row=2, column=1)
 
-    buttonSign = Button(windowSignIn, text='Sign up', command=bSignup)
+    buttonSign = Button(windowSignIn, text='Sign up', command=bSignup, bg="PeachPuff3")
     buttonSign.grid(columnspan=2, sticky=W)
 
     msgError = Label(windowSignIn)
@@ -41,10 +44,10 @@ def bSignup():
     with open(creds, 'r') as f:
         for line in f:
             user, pswd = line.strip().split(':')
-            credss[user] = pswd
+            x=user
 
     checkUsr = entryLogin.get()
-    if checkUsr in credss[user]:
+    if checkUsr in user:
         msgError.configure(text='User exists already!')
     else:
         with open(creds, 'a') as f:
@@ -57,7 +60,7 @@ def bSignup():
     windowSignIn.destroy()
     logIn()
 
-#window 1 close
+# window 1 close
 def logIn():
     global entryLoginL
     global entryPswdL
@@ -66,12 +69,16 @@ def logIn():
 #window 2
     windowLogin = Tk()
     windowLogin.title('Login')
+    windowLogin.config(bg="PeachPuff2")
+    windowLogin.geometry("250x400")
 
-    instruction = Label(windowLogin, text='Log in!\n')
+
+
+    instruction = Label(windowLogin, text='             Log in!\n', bg="PeachPuff2", font="-weight bold")
     instruction.grid(sticky=E)
-    labelLoginL = Label(windowLogin, text='Login: ')
+    labelLoginL = Label(windowLogin, text='Login: ', bg="PeachPuff2")
     labelLoginL.grid(row=1, sticky=W)
-    labelPswdL = Label(windowLogin, text='Password: ')
+    labelPswdL = Label(windowLogin, text='Password: ', bg="PeachPuff2")
     labelPswdL.grid(row=2, sticky=W)
 
     entryLoginL = Entry(windowLogin)
@@ -79,8 +86,8 @@ def logIn():
     entryPswdL = Entry(windowLogin, show='*')
     entryPswdL.grid(row=2, column=1)
 
-    buttonLog = Button(windowLogin, text='Login', command=checkLogin)
-    buttonReg = Button(windowLogin, text='Register', command=signUp)
+    buttonLog = Button(windowLogin, text='Login', command=checkLogin, bg="PeachPuff3")
+    buttonReg = Button(windowLogin, text='Register', command=signUp, bg="PeachPuff3")
     buttonLog.grid(columnspan=2, sticky=W)
     buttonReg.grid(columnspan=2, sticky=W)
 
@@ -103,7 +110,7 @@ def checkLogin():
         windowLogin.destroy()
         mainWindow()
     else:
-        error.configure(text="Credentials are wrong")
+        error.configure(text="Credentials are wrong", bg="PeachPuff2")
         windowLogin.mainloop()
 #window 2 close
 
@@ -112,11 +119,13 @@ def mainWindow():
 #window 3
     windowLogged = Tk()
     windowLogged.title('Search Engine')
-    windowLogged.geometry('120x350')
+    windowLogged.config(bg="PeachPuff2")
+    windowLogged.geometry("250x400")
 
-    sEngineB = Button(windowLogged, text="Search", command=searchEngine)
-    sAddB = Button(windowLogged, text='Add', command=winAddTool)
-    logOutB = Button(windowLogged, text="Logout", command=logOut)
+
+    sEngineB = Button(windowLogged, text="Search", command=searchEngine, bg="PeachPuff3")
+    sAddB = Button(windowLogged, text='Add', command=winAddTool, bg="PeachPuff3")
+    logOutB = Button(windowLogged, text="Logout", command=logOut, bg="PeachPuff3")
 
     sEngineB.place(relx=0.5, rely=0.1, anchor=CENTER)
     sAddB.place(relx=0.5, rely=0.2, anchor=CENTER)
@@ -128,12 +137,13 @@ def searchEngine():
     #window 4
     windowSearch = Tk()
     windowSearch.title('Tools')
-
+    windowSearch.config(bg="PeachPuff2")
+    windowSearch.geometry("400x400")
     i = 2
-    gName = Label(windowSearch, text='Name', font='bold')
-    gDay = Label(windowSearch, text='Per Day', font='bold')
-    gHDay = Label(windowSearch, text='Half of Day', font='bold')
-    gIsAvail = Label(windowSearch, text='Is Available', font='bold')
+    gName = Label(windowSearch, text='Name', font='bold', bg="PeachPuff2")
+    gDay = Label(windowSearch, text='Per Day', font='bold', bg="PeachPuff2")
+    gHDay = Label(windowSearch, text='Half of Day', font='bold', bg="PeachPuff2")
+    gIsAvail = Label(windowSearch, text='Is Available', font='bold', bg="PeachPuff2")
     gName.grid(row=1, column=1)
     gDay.grid(row=1, column=2)
     gHDay.grid(row=1, column=3)
@@ -141,10 +151,10 @@ def searchEngine():
     with open(base, 'r') as f:
         for line in f:
             name, day, hday, isAvailable = line.strip().split(':')
-            nm = Label(windowSearch, text=name)
-            dy = Label(windowSearch, text=day)
-            hdy = Label(windowSearch, text=hday)
-            isAvail = Label(windowSearch, text=isAvailable)
+            nm = Label(windowSearch, text=name, bg="PeachPuff2")
+            dy = Label(windowSearch, text=day, bg="PeachPuff2")
+            hdy = Label(windowSearch, text=hday, bg="PeachPuff2")
+            isAvail = Label(windowSearch, text=isAvailable, bg="PeachPuff2")
             nm.grid(row=i, column=1)
             dy.grid(row=i, column=2)
             hdy.grid(row=i, column=3)
@@ -159,13 +169,14 @@ def winAddTool():
     global eName
     global eDay
     global eHDay
-#window 5
+# window 5
     windowAddTool = Tk()
     windowAddTool.title('Add new tool')
-
-    gName = Label(windowAddTool, text='Name', font='bold')
-    gDay = Label(windowAddTool, text='Price per Day', font='bold')
-    gHDay = Label(windowAddTool, text='Price per half day', font='bold')
+    windowAddTool.config(bg="PeachPuff2")
+    windowAddTool.geometry("250x400")
+    gName = Label(windowAddTool, text='Name', font='bold', bg="PeachPuff2")
+    gDay = Label(windowAddTool, text='Price per Day', font='bold', bg="PeachPuff2")
+    gHDay = Label(windowAddTool, text='Price per half day', font='bold', bg="PeachPuff2")
     gName.grid(row=1, column=1)
     gDay.grid(row=2, column=1)
     gHDay.grid(row=3, column=1)
@@ -177,7 +188,7 @@ def winAddTool():
     eDay.grid(row=2, column=2)
     eHDay.grid(row=3, column=2)
 
-    addButton = Button(windowAddTool, text='Add', command=addTool)
+    addButton = Button(windowAddTool, text='Add', command=addTool, bg="PeachPuff3")
     addButton.grid(row=4, columnspan=2, sticky=W)
 
     windowAddTool.mainloop()
@@ -196,13 +207,13 @@ def addTool():
         f.close()
 
     windowAddTool.destroy()
-#window 5 close
 
+#window 5 close
 def logOut():
     windowLogged.destroy()
     logIn()
-#window 3 close
 
+#window 3 close
 if os.path.isfile(creds):
     logIn()
 else:
