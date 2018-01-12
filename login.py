@@ -34,7 +34,7 @@ def signUp():
     buttonSign = Button(windowSignIn, text='Sign up', command=bSignup, bg="PeachPuff3")
     buttonSign.grid(columnspan=2, sticky=W)
 
-    msgError = Label(windowSignIn)
+    msgError = Label(windowSignIn, bg="PeachPuff3")
     msgError.grid(row=3, columnspan=1, sticky=W)
 
     windowSignIn.mainloop()
@@ -91,7 +91,7 @@ def logIn():
     buttonLog.grid(columnspan=2, sticky=W)
     buttonReg.grid(columnspan=2, sticky=W)
 
-    error = Label(windowLogin)
+    error = Label(windowLogin, bg="PeachPuff2")
     error.grid(row=6)
 
     windowLogin.mainloop()
