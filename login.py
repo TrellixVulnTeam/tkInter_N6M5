@@ -1,6 +1,6 @@
 from tkinter import *
 import os
-
+from tkinter import messagebox
 
 creds = 'users.txt'
 base = 'search.txt'
@@ -11,13 +11,15 @@ def signUp():
     global windowSignIn
     global entryLogin
     global entryPswd
-    global msgError
 #window 1
+
     windowLogin.destroy()
+
     windowSignIn = Tk()
     windowSignIn.title('Sign up')
     windowSignIn.config(bg="PeachPuff2")
     windowSignIn.geometry("250x400")
+
     instruction = Label(windowSignIn, text='Please enter new credidentials\n', bg="PeachPuff2")
     instruction.grid(row=0, column=0, sticky=E)
 
@@ -34,8 +36,6 @@ def signUp():
     buttonSign = Button(windowSignIn, text='Sign up', command=bSignup, bg="PeachPuff3")
     buttonSign.grid(columnspan=2, sticky=W)
 
-    msgError = Label(windowSignIn, bg="PeachPuff3")
-    msgError.grid(row=3, columnspan=1, sticky=W)
 
     windowSignIn.mainloop()
 
@@ -44,11 +44,11 @@ def bSignup():
     with open(creds, 'r') as f:
         for line in f:
             user, pswd = line.strip().split(':')
-            x=user
+            credss[user] = pswd
 
     checkUsr = entryLogin.get()
     if checkUsr in user:
-        msgError.configure(text='User exists already!')
+        messagebox.showwarning('Error', 'User exists already!')
     else:
         with open(creds, 'a') as f:
             f.write(entryLogin.get())
@@ -57,15 +57,16 @@ def bSignup():
             f.write('\n')
             f.close()
 
-    windowSignIn.destroy()
-    logIn()
+        messagebox.showwarning('Success!', 'User registered successfully!')
+        windowSignIn.destroy()
+        logIn()
+
 
 # window 1 close
 def logIn():
     global entryLoginL
     global entryPswdL
     global windowLogin
-    global error
 #window 2
     windowLogin = Tk()
     windowLogin.title('Login')
@@ -74,7 +75,7 @@ def logIn():
 
 
 
-    instruction = Label(windowLogin, text='             Log in!\n', bg="PeachPuff2", font="-weight bold")
+    instruction = Label(windowLogin, text='Log in!\n', bg="PeachPuff2", font="-weight bold")
     instruction.grid(sticky=E)
     labelLoginL = Label(windowLogin, text='Login: ', bg="PeachPuff2")
     labelLoginL.grid(row=1, sticky=W)
@@ -90,9 +91,6 @@ def logIn():
     buttonReg = Button(windowLogin, text='Register', command=signUp, bg="PeachPuff3")
     buttonLog.grid(columnspan=2, sticky=W)
     buttonReg.grid(columnspan=2, sticky=W)
-
-    error = Label(windowLogin, bg="PeachPuff2")
-    error.grid(row=6)
 
     windowLogin.mainloop()
 
@@ -110,7 +108,7 @@ def checkLogin():
         windowLogin.destroy()
         mainWindow()
     else:
-        error.configure(text="Credentials are wrong", bg="PeachPuff2")
+        messagebox.showwarning('Error', "Wrong credentials or user doesn't exist")
         windowLogin.mainloop()
 #window 2 close
 
