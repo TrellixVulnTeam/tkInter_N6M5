@@ -46,19 +46,27 @@ def bSignup():
             credss[user] = pswd
 
     checkUsr = entryLogin.get()
-    if checkUsr in user:
-        messagebox.showwarning('Error', 'User exists already!')
+    checkPswd = entryPswd.get()
+    if checkUsr == '' and checkPswd == '':
+        messagebox.showwarning('Error', 'Enter credentials!')
+    elif checkPswd == '' and checkUsr != '':
+        messagebox.showwarning('Error', 'Enter password!')
+    elif checkUsr == '' and checkPswd != '':
+        messagebox.showwarning('Error', 'Enter username!')
     else:
-        with open(creds, 'a') as f:
-            f.write(entryLogin.get())
-            f.write(':')
-            f.write(entryPswd.get())
-            f.write('\n')
-            f.close()
+        if any(s in line for s in checkUsr):
+            messagebox.showwarning('Error', 'User exists already!')
+        else:
+            with open(creds, 'a') as f:
+                f.write(entryLogin.get())
+                f.write(':')
+                f.write(entryPswd.get())
+                f.write('\n')
+                f.close()
 
-        messagebox.showwarning('Success!', 'User registered successfully!')
-        windowSignIn.destroy()
-        logIn()
+            messagebox.showwarning('Success!', 'User registered successfully!')
+            windowSignIn.destroy()
+            logIn()
 
 
 # window 1 close
