@@ -36,7 +36,6 @@ def signUp():
     buttonSign = Button(windowSignIn, text='Sign up', command=bSignup, bg="PeachPuff3")
     buttonSign.grid(columnspan=2, sticky=W)
 
-
     windowSignIn.mainloop()
 
 
@@ -72,8 +71,6 @@ def logIn():
     windowLogin.title('Login')
     windowLogin.config(bg="PeachPuff2")
     windowLogin.geometry("250x400")
-
-
 
     instruction = Label(windowLogin, text='Log in!\n', bg="PeachPuff2", font="-weight bold")
     instruction.grid(sticky=E)
@@ -112,6 +109,7 @@ def checkLogin():
         windowLogin.mainloop()
 #window 2 close
 
+
 def mainWindow():
     global windowLogged
 #window 3
@@ -119,7 +117,6 @@ def mainWindow():
     windowLogged.title('Search Engine')
     windowLogged.config(bg="PeachPuff2")
     windowLogged.geometry("250x400")
-
 
     sEngineB = Button(windowLogged, text="Search", command=searchEngine, bg="PeachPuff3")
     sAddB = Button(windowLogged, text='Add', command=winAddTool, bg="PeachPuff3")
@@ -138,21 +135,27 @@ def searchEngine():
     windowSearch.config(bg="PeachPuff2")
     windowSearch.geometry("400x400")
     i = 2
+
     gName = Label(windowSearch, text='Name', font='bold', bg="PeachPuff2")
     gDay = Label(windowSearch, text='Per Day', font='bold', bg="PeachPuff2")
     gHDay = Label(windowSearch, text='Half of Day', font='bold', bg="PeachPuff2")
     gIsAvail = Label(windowSearch, text='Is Available', font='bold', bg="PeachPuff2")
+
     gName.grid(row=1, column=1)
     gDay.grid(row=1, column=2)
     gHDay.grid(row=1, column=3)
     gIsAvail.grid(row=1, column=4)
+
     with open(base, 'r') as f:
         for line in f:
+
             name, day, hday, isAvailable = line.strip().split(':')
+
             nm = Label(windowSearch, text=name, bg="PeachPuff2")
             dy = Label(windowSearch, text=day, bg="PeachPuff2")
             hdy = Label(windowSearch, text=hday, bg="PeachPuff2")
             isAvail = Label(windowSearch, text=isAvailable, bg="PeachPuff2")
+
             nm.grid(row=i, column=1)
             dy.grid(row=i, column=2)
             hdy.grid(row=i, column=3)
@@ -172,21 +175,23 @@ def winAddTool():
     windowAddTool.title('Add new tool')
     windowAddTool.config(bg="PeachPuff2")
     windowAddTool.geometry("250x400")
+
     gName = Label(windowAddTool, text='Name', font='bold', bg="PeachPuff2")
     gDay = Label(windowAddTool, text='Price per Day', font='bold', bg="PeachPuff2")
     gHDay = Label(windowAddTool, text='Price per half day', font='bold', bg="PeachPuff2")
-    gName.grid(row=1, column=1)
-    gDay.grid(row=2, column=1)
-    gHDay.grid(row=3, column=1)
 
     eName = Entry(windowAddTool)
     eDay = Entry(windowAddTool)
     eHDay = Entry(windowAddTool)
+
+    addButton = Button(windowAddTool, text='Add', command=addTool, bg="PeachPuff3")
+
+    gName.grid(row=1, column=1)
+    gDay.grid(row=2, column=1)
+    gHDay.grid(row=3, column=1)
     eName.grid(row=1, column=2)
     eDay.grid(row=2, column=2)
     eHDay.grid(row=3, column=2)
-
-    addButton = Button(windowAddTool, text='Add', command=addTool, bg="PeachPuff3")
     addButton.grid(row=4, columnspan=2, sticky=W)
 
     windowAddTool.mainloop()
@@ -204,10 +209,12 @@ def addTool():
         f.write('\n')
         f.close()
 
+    messagebox.showinfo('Success', 'Tool added')
     windowAddTool.destroy()
 
 #window 5 close
 def logOut():
+    messagebox.showinfo('Logged out', 'Logged out successfully')
     windowLogged.destroy()
     logIn()
 
