@@ -1,45 +1,38 @@
 from tkinter import *
 import os
 from tkinter import messagebox
-from PIL import Image, ImageTk
-#imports tkInter library
+from re import *
 
-#.txt files are bases for all the users and equipment added
 creds = 'users.txt'
 base = 'search.txt'
 credss = {}
 
-#defines what is needed in order to sign up, variable "global" makes it universal throughout the entire code
+
 def signUp():
     global windowSignIn
     global entryLogin
     global entryPswd
 #window 1
 
-#window.destroy makes a window close after opening the other window
     windowLogin.destroy()
 
-    windowSignIn = Tk()#imports tkInter
-    windowSignIn.title('Sign up')#adds the "sign up" title
-    windowSignIn.config(bg="PeachPuff2")#adds the background color
-    windowSignIn.geometry("500x400")#defines the size of the window
+    windowSignIn = Tk()
+    windowSignIn.title('Sign up')
+    windowSignIn.config(bg="PeachPuff2")
+    windowSignIn.geometry("250x400")
 
-    instruction = Label(windowSignIn, text='Please enter new credidentials\n', bg="PeachPuff2", font="-weight bold")
-    instruction.grid(row=0, column=0, sticky=E)#creates a grid where sticky defines on which side should the content be
-
-    img_in2 = Image.open("login.png").resize((128, 128), Image.ANTIALIAS)
-    tkimage2 = ImageTk.PhotoImage(img_in2)
-    Label(windowSignIn, image=tkimage2, bg="PeachPuff2").grid(row=1, column=1)
+    instruction = Label(windowSignIn, text='Please enter new credidentials\n', bg="PeachPuff2")
+    instruction.grid(row=0, column=0, sticky=E)
 
     labelLogin = Label(windowSignIn, text='New login: ', bg="PeachPuff2")
-    labelLogin.grid(row=2, column=0, sticky=W)
+    labelLogin.grid(row=1, column=0, sticky=W)
     labelPswd = Label(windowSignIn, text='New password: ', bg="PeachPuff2")
-    labelPswd.grid(row=3, column=0, sticky=W)
+    labelPswd.grid(row=2, column=0, sticky=W)
 
     entryLogin = Entry(windowSignIn)
-    entryLogin.grid(row=2, column=1)
+    entryLogin.grid(row=1, column=1)
     entryPswd = Entry(windowSignIn, show='*')
-    entryPswd.grid(row=3, column=1)
+    entryPswd.grid(row=2, column=1)
 
     buttonSign = Button(windowSignIn, text='Sign up', command=bSignup, bg="PeachPuff3")
     buttonSign.grid(columnspan=2, sticky=W)
@@ -50,11 +43,12 @@ def signUp():
 def bSignup():
     with open(creds, 'r') as f:
         for line in f:
-            user, pswd = line.strip().split(':')#indicates that the password and the log in should be divided by ':'
+            user, pswd = line.strip().split(':')
             credss[user] = pswd
 
     checkUsr = entryLogin.get()
     checkPswd = entryPswd.get()
+
     if checkUsr == '' and checkPswd == '':
         messagebox.showwarning('Error', 'Enter credentials!')
     elif checkPswd == '' and checkUsr != '':
@@ -62,7 +56,10 @@ def bSignup():
     elif checkUsr == '' and checkPswd != '':
         messagebox.showwarning('Error', 'Enter username!')
     else:
-        if any(s in line for s in checkUsr):
+        with open(creds) as f:
+            for line in f:
+                match = re.search('f\(\s*([^,]+)\s*,\s*([^,]+)\s*\)', checkUsr)
+        if match:
             messagebox.showwarning('Error', 'User exists already!')
         else:
             with open(creds, 'a') as f:
@@ -88,22 +85,17 @@ def logIn():
     windowLogin.config(bg="PeachPuff2")
     windowLogin.geometry("250x400")
 
-#adds photo (.antialias gets rid of pixelization)
-    img_in = Image.open("sharedtool.png").resize((128,128), Image.ANTIALIAS)
-    tkimage = ImageTk.PhotoImage(img_in)
-    Label(windowLogin, image=tkimage, bg="PeachPuff2").grid(row=0, column=1)
-
     instruction = Label(windowLogin, text='Log in!\n', bg="PeachPuff2", font="-weight bold")
-    instruction.grid(row=1, column=1)
+    instruction.grid(sticky=E)
     labelLoginL = Label(windowLogin, text='Login: ', bg="PeachPuff2")
-    labelLoginL.grid(row=2, sticky=W)
+    labelLoginL.grid(row=1, sticky=W)
     labelPswdL = Label(windowLogin, text='Password: ', bg="PeachPuff2")
-    labelPswdL.grid(row=3, sticky=W)
+    labelPswdL.grid(row=2, sticky=W)
 
     entryLoginL = Entry(windowLogin)
-    entryLoginL.grid(row=2, column=1)
+    entryLoginL.grid(row=1, column=1)
     entryPswdL = Entry(windowLogin, show='*')
-    entryPswdL.grid(row=3, column=1)
+    entryPswdL.grid(row=2, column=1)
 
     buttonLog = Button(windowLogin, text='Login', command=checkLogin, bg="PeachPuff3")
     buttonReg = Button(windowLogin, text='Register', command=signUp, bg="PeachPuff3")
@@ -112,7 +104,7 @@ def logIn():
 
     windowLogin.mainloop()
 
-#checks if the password and login is correct
+
 def checkLogin():
     with open(creds, 'r') as f:
         for line in f:
@@ -121,13 +113,19 @@ def checkLogin():
 
     username = entryLoginL.get()
     password = entryPswdL.get()
-
-    if username in credss and credss[username] == password:
-        windowLogin.destroy()
-        mainWindow()
+    if username == '' and password == '':
+        messagebox.showwarning('Error', 'Enter credentials!')
+    elif password == '' and username != '':
+        messagebox.showwarning('Error', 'Enter password!')
+    elif username == '' and password != '':
+        messagebox.showwarning('Error', 'Enter username!')
     else:
-        messagebox.showwarning('Error', "Wrong credentials or user doesn't exist")
-        windowLogin.mainloop()
+        if username in credss and credss[username] == password:
+            windowLogin.destroy()
+            mainWindow()
+        else:
+            messagebox.showwarning('Error', "Wrong credentials or user doesn't exist")
+            windowLogin.mainloop()
 #window 2 close
 
 
