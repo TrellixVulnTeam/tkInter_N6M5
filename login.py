@@ -1,27 +1,31 @@
 from tkinter import *
 import os
 from tkinter import messagebox
+from PIL import Image, ImageTk
+#imports tkInter library
 
+#.txt files are bases for all the users and equipment added
 creds = 'users.txt'
 base = 'search.txt'
 credss = {}
 
-
+#defines what is needed in order to sign up
 def signUp():
     global windowSignIn
     global entryLogin
     global entryPswd
 #window 1
 
+#window.destroy makes a window close after opening the other window
     windowLogin.destroy()
 
-    windowSignIn = Tk()
-    windowSignIn.title('Sign up')
-    windowSignIn.config(bg="PeachPuff2")
-    windowSignIn.geometry("250x400")
+    windowSignIn = Tk()#imports tkInter
+    windowSignIn.title('Sign up')#adds the "sign up" title
+    windowSignIn.config(bg="PeachPuff2")#adds the background color
+    windowSignIn.geometry("250x400")#defines the size of the window
 
     instruction = Label(windowSignIn, text='Please enter new credidentials\n', bg="PeachPuff2")
-    instruction.grid(row=0, column=0, sticky=E)
+    instruction.grid(row=0, column=0, sticky=E)#creates a grid where sticky defines on which side should the content be
 
     labelLogin = Label(windowSignIn, text='New login: ', bg="PeachPuff2")
     labelLogin.grid(row=1, column=0, sticky=W)
@@ -42,7 +46,7 @@ def signUp():
 def bSignup():
     with open(creds, 'r') as f:
         for line in f:
-            user, pswd = line.strip().split(':')
+            user, pswd = line.strip().split(':')#indicates that the password and the log in should be divided by ':'
             credss[user] = pswd
 
     checkUsr = entryLogin.get()
@@ -80,17 +84,22 @@ def logIn():
     windowLogin.config(bg="PeachPuff2")
     windowLogin.geometry("250x400")
 
+
+    img_in = Image.open("sharedtool.png").resize((128,128), Image.ANTIALIAS)
+    tkimage = ImageTk.PhotoImage(img_in)
+    Label(windowLogin, image=tkimage, bg="PeachPuff2").grid(row=0, column=1)
+
     instruction = Label(windowLogin, text='Log in!\n', bg="PeachPuff2", font="-weight bold")
-    instruction.grid(sticky=E)
+    instruction.grid(row=1, column=1)
     labelLoginL = Label(windowLogin, text='Login: ', bg="PeachPuff2")
-    labelLoginL.grid(row=1, sticky=W)
+    labelLoginL.grid(row=2, sticky=W)
     labelPswdL = Label(windowLogin, text='Password: ', bg="PeachPuff2")
-    labelPswdL.grid(row=2, sticky=W)
+    labelPswdL.grid(row=3, sticky=W)
 
     entryLoginL = Entry(windowLogin)
-    entryLoginL.grid(row=1, column=1)
+    entryLoginL.grid(row=2, column=1)
     entryPswdL = Entry(windowLogin, show='*')
-    entryPswdL.grid(row=2, column=1)
+    entryPswdL.grid(row=3, column=1)
 
     buttonLog = Button(windowLogin, text='Login', command=checkLogin, bg="PeachPuff3")
     buttonReg = Button(windowLogin, text='Register', command=signUp, bg="PeachPuff3")
