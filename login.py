@@ -9,7 +9,7 @@ creds = 'users.txt'
 base = 'search.txt'
 credss = {}
 
-#defines what is needed in order to sign up
+#defines what is needed in order to sign up, variable "global" makes it universal throughout the entire code
 def signUp():
     global windowSignIn
     global entryLogin
@@ -22,20 +22,24 @@ def signUp():
     windowSignIn = Tk()#imports tkInter
     windowSignIn.title('Sign up')#adds the "sign up" title
     windowSignIn.config(bg="PeachPuff2")#adds the background color
-    windowSignIn.geometry("250x400")#defines the size of the window
+    windowSignIn.geometry("500x400")#defines the size of the window
 
-    instruction = Label(windowSignIn, text='Please enter new credidentials\n', bg="PeachPuff2")
+    instruction = Label(windowSignIn, text='Please enter new credidentials\n', bg="PeachPuff2", font="-weight bold")
     instruction.grid(row=0, column=0, sticky=E)#creates a grid where sticky defines on which side should the content be
 
+    img_in2 = Image.open("login.png").resize((128, 128), Image.ANTIALIAS)
+    tkimage2 = ImageTk.PhotoImage(img_in2)
+    Label(windowSignIn, image=tkimage2, bg="PeachPuff2").grid(row=1, column=1)
+
     labelLogin = Label(windowSignIn, text='New login: ', bg="PeachPuff2")
-    labelLogin.grid(row=1, column=0, sticky=W)
+    labelLogin.grid(row=2, column=0, sticky=W)
     labelPswd = Label(windowSignIn, text='New password: ', bg="PeachPuff2")
-    labelPswd.grid(row=2, column=0, sticky=W)
+    labelPswd.grid(row=3, column=0, sticky=W)
 
     entryLogin = Entry(windowSignIn)
-    entryLogin.grid(row=1, column=1)
+    entryLogin.grid(row=2, column=1)
     entryPswd = Entry(windowSignIn, show='*')
-    entryPswd.grid(row=2, column=1)
+    entryPswd.grid(row=3, column=1)
 
     buttonSign = Button(windowSignIn, text='Sign up', command=bSignup, bg="PeachPuff3")
     buttonSign.grid(columnspan=2, sticky=W)
@@ -84,7 +88,7 @@ def logIn():
     windowLogin.config(bg="PeachPuff2")
     windowLogin.geometry("250x400")
 
-
+#adds photo (.antialias gets rid of pixelization)
     img_in = Image.open("sharedtool.png").resize((128,128), Image.ANTIALIAS)
     tkimage = ImageTk.PhotoImage(img_in)
     Label(windowLogin, image=tkimage, bg="PeachPuff2").grid(row=0, column=1)
@@ -108,7 +112,7 @@ def logIn():
 
     windowLogin.mainloop()
 
-
+#checks if the password and login is correct
 def checkLogin():
     with open(creds, 'r') as f:
         for line in f:
