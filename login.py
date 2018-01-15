@@ -228,7 +228,7 @@ def addTool():
         f.write(':')
         f.write(eDay.get())
         f.write(':')
-        f.write(eHDay.get())#heading of the table
+        f.write(eHDay.get())#heading of the table of content
         f.write(':')#means that the objects must be separated by ':'
         f.write('true')#means the tool is available
         f.write('\n')
