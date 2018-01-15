@@ -21,20 +21,21 @@ def signUp():
 
     windowSignIn = Tk()#imports tkInter
     windowSignIn.title('Sign up')#adds the "sign up" title
-    windowSignIn.config(bg="PeachPuff2")#adds the background color
+    windowSignIn.config(bg="PeachPuff2")#adds the background color (color of the page)
     windowSignIn.geometry("500x400")#defines the size of the window
 
     instruction = Label(windowSignIn, text='Please enter new credidentials\n', bg="PeachPuff2", font="-weight bold")
     instruction.grid(row=0, column=0, sticky=E)#creates a grid where sticky defines on which side should the content be
 
+#adding a picture
     img_in2 = Image.open("login.png").resize((128, 128), Image.ANTIALIAS)
     tkimage2 = ImageTk.PhotoImage(img_in2)
-    Label(windowSignIn, image=tkimage2, bg="PeachPuff2").grid(row=1, column=1)
+    Label(windowSignIn, image=tkimage2, bg="PeachPuff2").grid(row=1, column=1)#defines the place in the window grid
 
     labelLogin = Label(windowSignIn, text='New login: ', bg="PeachPuff2")
-    labelLogin.grid(row=2, column=0, sticky=W)
+    labelLogin.grid(row=2, column=0, sticky=N)
     labelPswd = Label(windowSignIn, text='New password: ', bg="PeachPuff2")
-    labelPswd.grid(row=3, column=0, sticky=W)
+    labelPswd.grid(row=3, column=0, sticky=N)
 
     entryLogin = Entry(windowSignIn)
     entryLogin.grid(row=2, column=1)
@@ -42,21 +43,23 @@ def signUp():
     entryPswd.grid(row=3, column=1)
 
     buttonSign = Button(windowSignIn, text='Sign up', command=bSignup, bg="PeachPuff3")
-    buttonSign.grid(columnspan=2, sticky=W)
+    buttonSign.grid(columnspan=2, sticky=N)
 
     windowSignIn.mainloop()
 
-
+#constant for every window
 def bSignup():
     with open(creds, 'r') as f:
         for line in f:
             user, pswd = line.strip().split(':')#indicates that the password and the log in should be divided by ':'
             credss[user] = pswd
 
+
+#checks if the password and user name are correct
     checkUsr = entryLogin.get()
     checkPswd = entryPswd.get()
     if checkUsr == '' and checkPswd == '':
-        messagebox.showwarning('Error', 'Enter credentials!')
+        messagebox.showwarning('Error', 'Enter credentials!')#error message box pops up
     elif checkPswd == '' and checkUsr != '':
         messagebox.showwarning('Error', 'Enter password!')
     elif checkUsr == '' and checkPswd != '':
@@ -78,6 +81,7 @@ def bSignup():
 
 
 # window 1 close
+#constant for every window (global)
 def logIn():
     global entryLoginL
     global entryPswdL
@@ -224,9 +228,9 @@ def addTool():
         f.write(':')
         f.write(eDay.get())
         f.write(':')
-        f.write(eHDay.get())
-        f.write(':')
-        f.write('true')
+        f.write(eHDay.get())#heading
+        f.write(':')#means that the objects must be separated by ':'
+        f.write('true')#means the tool is available
         f.write('\n')
         f.close()
 
