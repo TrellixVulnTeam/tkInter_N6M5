@@ -65,7 +65,12 @@ def bSignup():
     elif checkUsr == '' and checkPswd != '':
         messagebox.showwarning('Error', 'Enter username!')
     else:
-        if any(s in line for s in checkUsr):
+        with open(creds) as f:
+            for line in f:
+                user, password = line.strip().split(':')
+                credss[user] = password
+                match = re.search(checkUsr, credss[user])
+        if match:
             messagebox.showwarning('Error', 'User exists already!')
         else:
             with open(creds, 'a') as f:
