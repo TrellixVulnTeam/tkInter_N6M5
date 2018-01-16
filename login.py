@@ -2,7 +2,7 @@ from tkinter import *
 import os
 from tkinter import messagebox
 from PIL import Image, ImageTk
-#imports tkInter libraries
+#imports libraries
 
 #.txt files are bases for all the users and equipment added
 creds = 'users.txt'
