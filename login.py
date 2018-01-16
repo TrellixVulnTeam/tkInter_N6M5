@@ -58,7 +58,9 @@ def bSignup():
     else:
         with open(creds) as f:
             for line in f:
-                match = re.search('f\(\s*([^,]+)\s*,\s*([^,]+)\s*\)', checkUsr)
+                user, password = line.strip().split(':')
+                credss[user] = password
+                match = re.search(checkUsr, credss[user])
         if match:
             messagebox.showwarning('Error', 'User exists already!')
         else:
