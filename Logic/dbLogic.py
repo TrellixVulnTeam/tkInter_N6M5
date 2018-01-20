@@ -2,7 +2,7 @@ from tinydb import *
 import time
 
 
-class DatabaseLogic:
+class DataBaseLogic:
 
     dbClient = ''
     dbTool = ''
