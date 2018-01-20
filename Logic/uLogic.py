@@ -5,11 +5,11 @@ class UserLogic:
     def __init__(self):
         return
 
-    def clientCreate(self, uName, pswd):
+    def userCreate(self, uName, pswd):
         db = DataBaseLogic()
         db.addClient(uName, pswd)
 
-    def getClientDetail(self, uId):
+    def getUserDetail(self, uId):
         db = DataBaseLogic()
         db.getClientDetail(uId)
 
