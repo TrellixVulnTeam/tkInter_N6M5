@@ -17,10 +17,10 @@ class DataBaseLogic:
         self.dbTool = TinyDB('Db/tools.json')
 
     #client database related queries
-    def addClient(self, user, pswd):
+    def addClient(self, user, pswd, avatar):
 
         self.dbClient.insert({
-            'uId': int(time.time()), 'cName': user, 'cPass': pswd, 'mAvail': 0
+            'uId': int(time.time()), 'cName': user, 'cPass': pswd,'avatar': avatar , 'mAvail': 0
         })
 
     def getClient(self, action, uName, uPswd):

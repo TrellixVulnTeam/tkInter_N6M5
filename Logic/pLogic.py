@@ -1,7 +1,7 @@
 from Logic.dbLogic import DataBaseLogic
 
 
-class PaymentsController:
+class PaymentsLogic:
     db = DataBaseLogic
 
     def addPayment(self, uId, items, price, oId, photos):
