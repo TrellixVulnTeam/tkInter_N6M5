@@ -19,7 +19,7 @@ from Pages.logout import Logout
 from Logic.lLogic import LoginLogic
 
 class Main(Tk):
-    session = LoginController()
+    session = LoginLogic()
     searchkeyword = ""
     selectedtool = ""
     selectedinvoice = ""
